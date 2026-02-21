@@ -1,0 +1,53 @@
+package com.studyopedia;
+
+ // Ensure this matches your project folder structure
+
+//Supporting class (cannot be public in this file)
+class Book {
+ String title, author, isbn;
+ double price;
+ int stock;
+
+ public Book(String title, String author, double price, String isbn, int stock) {
+     this.title = title;
+     this.author = author;
+     this.price = price;
+     this.isbn = isbn;
+     this.stock = stock;
+ }
+
+ public void displayInfo() {
+     System.out.println("Title: " + title + " | Author: " + author + 
+                        " | Price: $" + String.format("%.2f", price) + 
+                        " | ISBN: " + isbn + " | Stock: " + stock + 
+                        " | Available: " + (stock > 0 ? "Yes" : "No"));
+ }
+
+ public void applyDiscount(double percentage) {
+     this.price -= this.price * (percentage / 100);
+ }
+
+ public void addStock(int count) {
+     this.stock += count;
+ }
+}
+
+//Main class (must be public and match the filename)
+public class BookstoreSystem {
+ public static void main(String[] args) {
+     Book novel = new Book("The Great Gatsby", "F. Scott Fitzgerald", 15.00, "978-0743273565", 10);
+     Book textbook = new Book("Java Basics", "John Smith", 100.00, "978-0134670942", 0);
+
+     System.out.println("--- Initial Inventory ---");
+     novel.displayInfo();
+     textbook.displayInfo();
+
+     System.out.println("\nApplying 10% discount to Novel and adding 5 units to Textbook...");
+     novel.applyDiscount(10);
+     textbook.addStock(5);
+
+     System.out.println("\n--- Updated Inventory ---");
+     novel.displayInfo();
+     textbook.displayInfo();
+ }
+}
